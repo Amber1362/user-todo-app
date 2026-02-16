@@ -1,3 +1,4 @@
+alert('SCRIPT LOADED');
 let addTask = document.getElementById('todo');
 let inputTask = document.querySelector('#enterTask');
 let span = document.getElementById('span');
