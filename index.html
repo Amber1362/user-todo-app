@@ -11,15 +11,21 @@
 <h1 class="title">📌 Mini Task Board</h1>
         <div class="upper-section">
         <form id="todo">
-        <input type="value"  id="enterTask" class="inputTask" placeholder="Enter Task...">
-        <span id="span"></span>
+        <input type="value"  id="enterTask" class="inputTask" placeholder="Enter task...">
+        <select name="priority" id="priority">
+         <option value="High" id="high" class="high">High Priority</option>
+         <option value="Medium" id="medium" class="medium">Medium Priority</option>
+         <option value="Low" id="low" class="low">Low Priority</option>
+        </select>
         <button type="submit" class="addTask">Add Task ➕</button>
+        <button type="button" id="clearAll">Clear All ❌</button>
         </form>
+        <span id="span"></span>
         </div>
         <div class="board">
         <div id="todo-container">
         </div>
-        <div id="progress-container">
+        <div id="in-progress-container">
         </div>
         <div id="done-container">
         </div>

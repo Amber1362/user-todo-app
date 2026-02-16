@@ -9,6 +9,27 @@ body {
 .title {
     display: flex;
     justify-content: center;
+    font-weight:bold
+}
+
+.inputTask {
+    padding: 8px
+}
+
+#priority {
+    padding: 10px;
+    width: 180px
+}
+
+#span {
+    font-size: 12px;
+    color: rgb(255, 0, 0);
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+    margin-top: 3px;
+    margin-right: 490px;
+    font-weight: bold;
 }
 
 form {
@@ -17,42 +38,44 @@ form {
     gap: 10px
 }
 
-#todo input {
-    width: 200px;
-    height: 35px;
-    padding: 10px
-}
-
-#todo .addTask {
+.addTask {
     width: 100px;
     height: 35px;
+    cursor: pointer;
+    height: 40px;
 }
 
 .board {
     margin-top: 10px;
     display: flex;
     width: auto;
+    min-height: 200px;
     justify-content: space-between;
     align-items: center;
     background-color: rgb(255, 255, 255);
     gap: 10px;
+    min-width: 0;
 }
 
 #todo-container,
-#progress-container,
+#in-progress-container,
 #done-container {
+      min-width: 0;
     color: rgb(0, 0, 0);
     flex: 1;
     text-align: start;
     padding: 0;
     min-height: 470px;
+    max-height: 470px;
     background-color: rgb(230, 220, 200);
     border: 1px solid rgb(230, 220, 200);
     border-radius: 7px;
+     overflow-y: scroll;
+     position: relative;
 }
 
 #todo-container h3,
-#progress-container h3,
+#in-progress-container h3,
 #done-container h3 {
     border: 1px solid rgb(120, 0, 0);
     padding: 5px; 
@@ -61,14 +84,91 @@ form {
     text-align: center;
     background: rgb(120, 0, 0);
     color: rgb(230, 220, 200);
+    position: sticky;
+    top: 0px;
 }
 
 #todo-container p,
-#progress-container p,
+#in-progress-container p,
 #done-container p {
+    display: flex;
     margin: 10px;
     margin-top: 10px;
     color: rgb(80, 0, 0);
     border: 2px solid rgb(120, 0, 0);
-    padding: 10px
+    border-radius: 7px;
+    padding: 10px;
+    cursor: grab;
+    flex-direction: row;
+}
+
+.div-container {
+    flex: 1;
+    display: grid;
+}
+
+.edit-btn {
+   font-size: 20px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.delete-btn {
+   font-size: 20px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.start-btn {
+   font-size: 20px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.complete-btn {
+    font-size: 20px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.undo-btn {
+    font-size: 20px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.span-text {
+    text-wrap: pretty;
+    overflow-wrap: break-word;
+    flex: 1;
+}
+
+.edit-input {
+    flex: 1;
+}
+
+.cancel-btn {
+     font-size: 20px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.save-btn {
+     font-size: 20px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.span-priority {
+    color: rgb(80, 80, 80);
+    flex: 1;
+    flex-direction: column;
+    font-size: 15px;
 }
