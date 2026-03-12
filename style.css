@@ -3,7 +3,8 @@
 }
 
 body {
-    font-family: Arial, Helvetica, sans-serif
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: rgb(240, 240, 240)
 }
 
 .title {
@@ -13,12 +14,29 @@ body {
 }
 
 .inputTask {
-    padding: 8px
+    padding: 8px;
+    border: none;
+    box-shadow:  0.3px 0.4px 5px rgb(120, 120, 120);
+    transition: transform 0.3s ease-out, background-color 0.3s;
+}
+
+.inputTask:hover {
+    transform: scale(1.07);
 }
 
 #priority {
     padding: 10px;
-    width: 180px
+    width: 180px;
+    cursor: pointer;
+    border: none;
+    background-color: rgb(240, 240, 240);
+    box-shadow:  0.3px 0.4px 5px rgb(120, 120, 120);
+    transition: transform 0.3s ease-out, background-color 0.3s;
+}
+
+#priority:hover {
+    transform: scale(1.07);
+    background-color: rgb(255, 255, 255);
 }
 
 #span {
@@ -35,7 +53,25 @@ body {
 form {
     display: flex;
     justify-content: center;
-    gap: 10px
+    gap: 17px
+}
+
+.inputDate {
+    cursor: pointer;
+    border: none;
+    background-color: rgb(240, 240, 240);
+    box-shadow:  0.3px 0.4px 5px rgb(120, 120, 120);
+    transition: transform 0.3s ease-out, background-color 0.3s;
+}
+
+.inputDate:hover {
+    transform: scale(1.1);
+    background-color: rgb(255, 255, 255);
+}
+
+.date-span {
+    font-size: 13px;
+    color: rgb(80, 80, 80)
 }
 
 .addTask {
@@ -43,6 +79,18 @@ form {
     height: 35px;
     cursor: pointer;
     height: 40px;
+    border: none;
+    box-shadow:  0.3px 0.4px 5px rgb(120, 120, 120);
+    transition: transform 0.3s ease-out, background-color 0.3s;
+}
+
+.addTask:hover {
+    transform: scale(1.07);
+    background-color: rgb(255, 255, 255)
+}
+
+.addTask:active {
+    transform: scale(1);
 }
 
 .board {
@@ -52,7 +100,7 @@ form {
     min-height: 200px;
     justify-content: space-between;
     align-items: center;
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(240, 240, 240);
     gap: 10px;
     min-width: 0;
 }
@@ -60,51 +108,65 @@ form {
 #todo-container,
 #in-progress-container,
 #done-container {
-      min-width: 0;
+    min-width: 0;
     color: rgb(0, 0, 0);
     flex: 1;
     text-align: start;
     padding: 0;
     min-height: 470px;
     max-height: 470px;
-    background-color: rgb(230, 220, 200);
-    border: 1px solid rgb(230, 220, 200);
+    background-color: rgb(255, 255, 255);
+    border: none;
+    box-shadow:  0.3px 0.4px 5px rgb(120, 120, 120);
     border-radius: 7px;
-     overflow-y: scroll;
+     overflow-y: auto;
      position: relative;
+     margin: 10px;
 }
 
 #todo-container h3,
 #in-progress-container h3,
 #done-container h3 {
-    border: 1px solid rgb(120, 0, 0);
+    border: none;
+    box-shadow:  0.3px 0.4px 5px rgb(120, 120, 120);
     padding: 5px; 
-    padding-bottom: 2.2px;
+    padding-bottom: 5px;
     margin: 0px;
     text-align: center;
-    background: rgb(120, 0, 0);
-    color: rgb(230, 220, 200);
+    background: rgb(200, 200, 200);
+    color: rgb(0, 0, 0);
     position: sticky;
     top: 0px;
+    z-index: 7777;
 }
 
 #todo-container p,
 #in-progress-container p,
 #done-container p {
     display: flex;
-    margin: 10px;
-    margin-top: 10px;
-    color: rgb(80, 0, 0);
-    border: 2px solid rgb(120, 0, 0);
+    margin: 15px;
+    color: rgb(0, 0, 0);
+    border: none;
+    background-color: rgb(230, 230, 230);
+    box-shadow:  0.3px 0.4px 5px rgb(120, 120, 120);
     border-radius: 7px;
     padding: 10px;
     cursor: grab;
     flex-direction: row;
+    transition: transform 0.3s ease-out, background-color 0.3s;
+}
+
+#todo-container p:hover,
+#in-progress-container p:hover,
+#done-container p:hover {
+    transform: scale(1.03);
+    background-color: rgb(255, 255, 255)
 }
 
 .div-container {
     flex: 1;
     display: grid;
+    gap: 5px
 }
 
 .edit-btn {
@@ -112,13 +174,43 @@ form {
     background: transparent;
     border: none;
     cursor: pointer;
+    color: rgb(150, 150, 150);
+    margin: 10px 0px 10px 0px;
+    border-radius: 5px;
+    transition: transform 0.3s ease-out, background-color 0.3s;
+}
+
+.edit-btn:hover {
+    transform: scale(1.1);
+    background-color: rgb(240, 240, 240);
+    box-shadow: 0.3px 0.4px 5px rgb(120, 120, 120);
+    color: rgb(0, 0, 0)
+}
+
+.edit-btn:active {
+    transform: scale(0.97);
 }
 
 .delete-btn {
-   font-size: 20px;
+   font-size: 40px;
     background: transparent;
     border: none;
     cursor: pointer;
+    color: rgb(150, 150, 150);
+    margin: 10px 0px 10px 0px;
+    border-radius: 5px;
+    transition: transform 0.3s ease-out, background-color 0.3s;
+}
+
+.delete-btn:hover {
+    transform: scale(1.1);
+    color: rgb(255, 0, 0);
+    background-color: rgb(240, 240, 240);
+    box-shadow: 0.3px 0.4px 5px rgb(120, 120, 120);
+}
+
+.delete-btn:active {
+    transform: scale(0.97);
 }
 
 .start-btn {
@@ -126,6 +218,21 @@ form {
     background: transparent;
     border: none;
     cursor: pointer;
+    margin: 10px 0px 10px 0px;
+    border-radius: 5px;
+    color: rgb(150, 150, 150);
+    transition: transform 0.3s ease-out, background-color 0.3s;
+}
+
+.start-btn:hover {
+    transform: scale(1.1);
+    background-color: rgb(240, 240, 240);
+    box-shadow: 0.3px 0.4px 5px rgb(120, 120, 120);
+    color: rgb(0, 0, 0)
+}
+
+.start-btn:active {
+    transform: scale(0.97);
 }
 
 .complete-btn {
@@ -133,6 +240,21 @@ form {
     background: transparent;
     border: none;
     cursor: pointer;
+    color: rgb(150, 150, 150);
+    margin: 10px 0px 10px 0px;
+    border-radius: 5px;
+    transition: transform 0.3s ease-out, background-color 0.3s;
+}
+
+.complete-btn:hover {
+    transform: scale(1.1);
+    background-color: rgb(240, 240, 240);
+    box-shadow: 0.3px 0.4px 5px rgb(120, 120, 120);
+    color: rgb(0, 0, 0);
+}
+
+.complete-btn:active {
+    transform: scale(0.97);
 }
 
 .undo-btn {
@@ -140,6 +262,21 @@ form {
     background: transparent;
     border: none;
     cursor: pointer;
+    color: rgb(150, 150, 150);
+    margin: 10px 0px 10px 0px;
+    border-radius: 5px;
+    transition: transform 0.3s ease-out, background-color 0.3s;
+}
+
+.undo-btn:hover {
+    transform: scale(1.1);
+    background-color: rgb(240, 240, 240);
+    box-shadow: 0.3px 0.4px 5px rgb(120, 120, 120);
+    color :rgb(0, 0, 0);
+}
+
+.undo-btn:active {
+    transform: scale(0.97);
 }
 
 .span-text {
@@ -153,10 +290,25 @@ form {
 }
 
 .cancel-btn {
-     font-size: 20px;
+     font-size: 40px;
     background: transparent;
     border: none;
     cursor: pointer;
+    color: rgb(150, 150, 150);
+    margin: 10px 0px 10px 0px;
+    border-radius: 5px;
+    transition: transform 0.3s ease-out, background-color 0.3s;
+}
+
+.cancel-btn:hover {
+    transform: scale(1.1);
+    background-color: rgb(240, 240, 240);
+    box-shadow: 0.3px 0.4px 5px rgb(120, 120, 120);
+    color: rgb(255, 0, 0);
+}
+
+.cancel-btn:active {
+    transform: scale(0.97);
 }
 
 .save-btn {
@@ -164,11 +316,191 @@ form {
     background: transparent;
     border: none;
     cursor: pointer;
+    color: rgb(150, 150, 150);
+    margin: 10px 0px 10px 0px;
+    border-radius: 5px;
+    transition: transform 0.3s ease-out, background-color 0.3s;
+}
+
+.save-btn:hover {
+    transform: scale(1.1);
+    background-color: rgb(240, 240, 240);
+    box-shadow: 0.3px 0.4px 5px rgb(120, 120, 120);
+    color: rgb(0, 200, 0);
+}
+
+.save-btn:active {
+    transform: scale(0.97);
 }
 
 .span-priority {
     color: rgb(80, 80, 80);
     flex: 1;
     flex-direction: column;
-    font-size: 15px;
+    font-size: 13px;
+}
+
+#clearAll {
+    cursor: pointer;
+    border: none;
+    background-color: rgb(240, 240, 240);
+    box-shadow:  0.3px 0.4px 5px rgb(120, 120, 120);
+    transition: transform 0.3s ease-out, background-color 0.3s;
+}
+
+#clearAll:hover {
+    transform: scale(1.08);
+    background-color: rgb(255, 255, 255);
+}
+
+#clearAll:active {
+    transform: scale(1);
+}
+
+.due-date-alert {
+    font-size: 13px;
+}
+
+.divSearch {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.inputSearch {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: rgb(255, 255, 255);
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAANsAAADmCAMAAABruQABAAAAkFBMVEUAAAD+/v7t7e3////s7Oz5+fnr6+v39/f29vbz8/Pw8PDo6OgyMjK+vr7S0tLl5eWysrJTU1PW1tajo6PFxcXe3t44ODhgYGDMzMyPj4+tra0tLS1nZ2eVlZVERESHh4cfHx8YGBh4eHhXV1dISEglJSV+fn5vb29lZWWKiooQEBCTk5NFRUUTExOdnZ2vr6/iEC/sAAARuklEQVR4nN1daXviOAzGcQ7bNEC52tKLHgPT6S79//9ubSfkjiUnTgZWXyaPp7xYxNZlyZoQSVR4kgIqnwJfPgmqBtWYrweZeuRqkKj/9vVnuBpk6r+TQXppQN4k482P1J/WkNQT85uQ5KPPs8/kU7oUoD68ea6mNBDQ/5s3qkj4vh9G6ikI5aOnBz01GKgnpgaFHlRPIVFPXD1x9UT04MUB+ROhKJBEmHriRD3ng1w9sSAbJNmgHouyz5CLAwom+j0TWtqK1f3JMnnlJQvGP8urSD0lC8a/OKBJvoZ56xpm+RrON4P+TJRvBv/SgMj/m7fSVvSb9rREatvTkd+wp7Vi1Z9R8+wB1HNGk0gR01R+iipPiEG91yUxbzrfbDbz+VQEcpJqY9sBuZlRrgN8g8TNfgvS8qN6Qv23N9s9HG9vJkXa//N0OC3u5xQHVHo7fWYkP+NAd1MimFj+PNxOTPTruJpxysU12SWS5qunNyNfGb28xnMWjWeXZOohOuuMVD14mc5g2SApKx9B6OzhBuapSB+rMJUyVS1W8gM6zqgA5E20MueKtCiI9GM+qJ9Y82AQ3B/2dowldLvzKCujswp6txmVgSY+vKfDJokrKF9ZvrEi3a0rorvNQMTPqAbUUXcLtn7qzpimtxO/RLuEi8W2J2eaDksmxuOt3TLNkOTL3j264EzR04x5mYnbyBtiRhlvtIE3L7Um1K+knoge1E9JDEI9BXpQchb32GZ1Oi6pmkikwAU5S3qbGalHkX0mByIF3zRotwLy/cnXLy45U3SY8xbfFDWjgugJK76pje6WX/nbNWeKVkz8bbuE0tUQnEna3pO/zNvG+XLM6Uvtur8VCxLRaTjOJN0sh4kFnaWSfEqlkhpMpZJ8klKJTj8HZU3SNyt8OTwjJSd1LEjLyewzUT6I1G80HpozSZ9zK/1GUfoNsgIC+joCa5JmdGybS3iDr8czrc7ejxPeYD+Az/6Mxdpk8u7SDwC8pSgYZavldKsDxcYZtfl8Nf+tycv1il7uYlTWJpNHtaCMMyr63ToQ5df87lB9BtLdg5ki7fQ2paPYJdHD6KxJmlOnsSAdDdQrQG/FdAVEI8n+Km3aZqQlhuYtHczik3pNatFzHkxjQfkujAr7kZGvv8OaZC5onBFWlkRwLGhYC9JIU6MOMJ0HoGJB9OfvsTbZK3dxMLuEr/8ia9KlI3SwWJC47z6vt+3nx9Px+HT32SNo9EETLdbBVk4jzul5t/YokpNi9YPIf+edJvTyvrsP5YaOIr2FKRPhbPF8t++C9UpLMzp7Lsl5d2Uw5yLKPkNafVN7H/vle6ZElfSjKhtdjm12R+RxSIFWdJBYED1YzuPzpL+pTeWq47nlqy17y0HsEjsj8t+vJRNQmEOxvv6wwt0H1DlvfGozg20s5EJEhXACtrFaEL/tePO9tlhQtk08bhHtf7mX3iQ+ZCp/NxtjZ9crFqR/C5L5DdocwxvI+wXnxTB+Bah48HdWS5TO3/HMLUU7EBAvqdolakp0if7mU8A97BFFrnI9NkMHKV64S7uEUqzC/ZwWEzdtwhyCo93CU+CSt2fktyr10/nYjAtzWkNOcyexoFBb3UgZ+bapWN2tOrQthIP0Mu76xoKUoaIdoyDA/Z53SYZfIdevCqRtn3ww8bDyQfkP0hiPmRmoPJjPqBYLIjit/UVtUicyIVY2fvkGtbN/CQioqt+ac7EpQX3dTq28shXQ5fhFBCh5eeJO7BK6w3xZTOtInY6WKL3DfF/Y94xKZ4aRfxFftaBmh98qxQzD3BfvlqvGikQwsismzB1FBCO7vKALdik31PMR37OwTukk2RttEN2eQHiKzxQGasgNLepujnhtz7RZU3Y+fvE4Qnwxr6dd4vE9+CVH2oLU/WiJIKyFFe/MW2JgC1i33VB61mIOU99hJb73UEDlGU0Kuj74B/yODSnbBxHCPihYLAWjoWhoUNilWzAMUHlGRd8UDm0tUFajbXpBiHCGb1FArbEg+FD7ibZryl5pIQJ2GaU70N0u8SIQnw/FmwdL6Ic+vMGSZEEHK8nzAkjLvak1CQM1nL/JJwZZPy80442W5BVp4K2llLI6pQwoAFfljKKAijWZmW/KIPC1qAuHoG1P26YXBBzKET5yHFDDGRUYbr2LjJrSIhbUqHK9DfTbJjlPXewSCv1uG2HDm/3REoMie2vRkTcaAMhP1IzUmzcBvbgDt+XtvN+g47YlASIv1rGgKhA/mmfwKJBA2X5TDBIuGKC4P4PkTCs/6Go8B0tiQZXBpiO+BiAKvbiQ44DOX37Wbwywen4EruS8FAtq1AGGEA6g42KOBKrobsCW/DNGaRckqt9ZJ7tEAAlpBzYGb4CKveGWvCX7kwNHN1Jv4wuBMLGgRiAoMLTxkECpH5Dk2gCoe1LK9WOt+Tn4pJ0moABYPWssUPLl51iQOf3zkL+IRGJISr1c/5xslSoTUsurSgbTEI6SMq1AHFiUJyxQ8fyNAAGuNR2pLNsc0HuiHewSSHMHY/FmPpbb2vKm0kaBULnybprzT4uxIPkY1uo+Jfp5TRZDOG1AgKcTaHGFAdJrUu9HIJxwoEFL3nB7MShKltSAhJm3ORoojwUF5ryPnUBEj1E6AKoq5WbTJBZYoDwWFJgtrqWANaWbEiHA0dlxe7sEcHB0qeAovAExoa8OvJlVwC+KsEzR8RIjEGD7vXN7W9nsXXxQRD1TMqjrmaJssFrkBBdGmQXlR2RTYaV9UyBWcSQYT7BfLOgMxI0z+bTzTdXLA3JcX/OCyaF1NyXGmWyptV0CrPLnEXmjv0wz+UWpY95WwWi8EWrURm92vGmz2ezw7tqTBltjr7axoAzImJXxh1jFXvWPajYnY10Aj6+Pj7JB+0J7ZubNExYV+zjeXOg3glJL3JxNE6KBMt7MFRxxgLACHJVlm3n749vbJeb9thiTN6Ms+bdDLAiQJQQReXHjB/jCmJCxly6ihR+gvSFzosA3qfhiXfw33jpYBjLWEDwSPFB6j6GYGXk7kIqXi83BKB4hN7rLNSBqPph+oS1+d/s9hsARyt2IdklonMmHvc0lt52JtiPyZvYDjpa8qV1HjYgTgx+AkTI2KWZm6+8LD6TsEp2NR81VQPPA/SWDzUDEHLs/EZtrD9NYkNkaiK1iQajc0LZYkDkotRAW5wHneIn5yPKZj6S7PW9vnMi9sLdLmHkp3LGxeANirxtLu0SPAiXB3GSZds6hrwMBztYbGijhTSlwwszKezLjbfcc54P5PceF2ofyhcmB4cLkxPYxhyc/AyyQyGJBITGHKXTpzSixIGNEYfKKB9I6IF0w5lj1LR1Fd3MgU2FB8cEJkuXOQLWz8o9H4A26JmvTjTcgRWBny5t1PpfmDbhFkFjyluw3KG/lc4xYEHQVwCcW6Lzf0r8XQLHKzMNz0Pn6QSA36cSxQOV8ZQZcUHio130aY0EdSpfBdLmlwAFV84LAAtDp4HYJWMPVNV8ZzPRurml1yBsQLleF7La8nbcJlKL/xhusbnetKBBX7i0697Sg3wD0KipbVtr2cdiKAiw5mnMckKj1tACzFydhrk2QsSCbVhQc2m0vrHNPC0qh63df2YB2STCFKialBkAbAbUaMbBmXWVjD8UbXDCzET16WoCL8oMN14oC/PJb3qenBQELkhdkqFYUcHlaHPTpaYEoWxfOYkHl8l4GCWl9qtijp0UARCknyo/zhtDdiPuyvqlV4KVkl+gpwXeyPLMheAv34BeHXXgrhnDMoXNNKo/ddSsKDtev/0YBNcWCsutPgcoKRcvIdSsKgrgIckYQQMaeFsBZlaZ95LgVBWiQTNQ+t04wotV7DMH6vok+1XGpuxnmUpEZtQtONN2pg7rg75M45I1jbgG+rdW5drkvCHK/k6/yRdEy7dOKgqEuOF5SEMirz6ja0wIsQtO0nfNaB4kurShogLrl5o666WlBUfeCPYYuYkFwICOhpXByjyFFFOdrmvXX3YLj7lc7MFd3/WFvBVsFPXnjc/j6Bk1TvIED8OZDVX5nupObrjtvFCdFJC14Z97ybZKa7xgFrulPzLzOsSCCve/vQxcxueppgb/G8MhJXlVq04oiioF4XU4bZgKqp3ube1rAkZOcVoLb6ze+Qd1clXxBczy7c08L2MHP6VFdmmJjl8ilY3N16LRew9vVLkk3OvYqQ0U3P0xftIPjjQq7m+1v5qw7b77fYL5z7AWKmn6tOMoPkHtwaXFlaMqcj3UosD0tOOZ+tQId11y3MTX4b5ROV126xm19VvcO+/S0sNlyCf15j1ma4H6+9j8rvBPq9uiV1Voo0M1cuO1p0alNx+fDYskZ1wtTi+X0fOR+ddx3ZEwzNxVue1p0bvfzz9PDLr5fLmez+3Ucr17v+jf5e0wO/5z1tKDU7g7rQelmmq5J31FPCzZgSzRb2gorWQL3tAictYzsT0qgOOxpIUfs78UfjKRAcdpriwIlyaOSZK4fbxUTl0JpJ2PSYyJQ+ve0SP0EOkU7I8PTo35bDnpapPuTYN3wMUgLFIf9TSm5ID23lQLFgV2SWQH2vTsGJClQXPJG/mrvpirdTEk7b37V5kKETEdu3WekR4aPBXne+WjO1IoCcwnySCSXZfeeFo2hAMR1s2OREihO+65Tej9wt8zfaANPMue4pzydQrc49qKfABvzVcxhqumrPS1MacY+iwd7dUchUCfSKT1yi1hQpRwjH0wco3SQAiVcXenXmqgvtwjS3HjcvqeFuYyG0uUAVsqzfGkJOv7NKZcHrMeBdXdJUwoWOzYwX6dZJVNgsSy3LRFnO7ukdiS4wJ8XgPQeUlaYEsd3C9xC2eHVnhaYFDPJuqt39z6txjIsmLux62mBpCiw7eTWSN8+rfeqgC+Rzpnj5lYXpZ4WPrq81xNs/tVLI3wuaEtKJ/7NPU7rp/xtPS2MurtuvdEYf45Wpv3rUv2EzQlGVntOOLFL6laA+r1W9mtzf1gLLlqnRO0ESjtQqaeF8bizOWM9EGy6eLeIqdyeNpSLOlApGd+GubAdaMLb1Dqyg4SK5NL5zztCL3x8r9UxJNSKQplIFnouIG1AUCwIF3mRSo+R5U/rucbL00OsxH3gwSGcxI61sC1D0TUWhI1O6ONNGonN/WK3+v46vB+P7++vp118v5EWBOeZ+4srFGcWei4UruwS45SEyoBI2u3qg4dkVXQBshMornnzG3lzBmTRh3pbiDjXz9/OU7JtReGsp0UDkA1zQQOQV++32OqbWtXSOgGykJahZ+hp0aN02VkNdBUI25FxkggUl3aJiTc3QDbLMhTXxZtvJVB6xIKs7opwBWTDHKsAnXtaiM6tKIirnhbNQBYuz1YFiOo9LUqxIPvrdXPR7R4I0R0uYy4Ug9ol7oHsBMp18Wa158KowBvKD/CbNnpLJuEAQKjClpS5PEB07mmBzrXJBwfoadEKZCFQXgSr9rQgtXQofCsKZz0t2oEsTjdfRK12/TJ1dwZksSyP7DrskhzIgrmFyHta9G9FkSylQYFwlXKa9qLY06Ix3bddBBiykgcEwnsFP0HfWFAXHdAPCPvmkvJUl7Gg4YHQ9Um61O8q7JIcCLvnYtHAW28Td2AgJHMnnvHWvxWFs54WEBBuWb5qZ6pnLMh5TwsYCMPcIfFNr0V3Z0BQIzX93q7LLsmBEHvudK28efCeixPe+sWC3Pe0wABxqFgo+ctUTqpfsk8rCs9VTwscECBQ7pK/BPUbcaXfnAKZ7zZa06uJlzQBmZbltmPO06Xw5hvuPZlRm1jQhfgBJaDWN/dQjgW1u128dXCgnhZ4oBaBchec/7IpB8O+FUWmlkYFaqwbfRLetcWCGoH4rJYXcdLK5cpiQY1AwitfNvexKagM0jFXrSEzrF04DAjk8eninHW1/9rQhp4WfVtROOtp0QFIvsllHMf304AETT0t+raiKInu0YGk80obgK5Xd8NA/2/ecj3TvRVFYUoXBJT2tOjZiiI5pr44oOuLBXW9x/DadLcR6MrtEiveLiufqx9QMRc7CWY0IHntFZBJMKNivl8IEPkPGlpK8lIoYHMAAAAASUVORK5CYII=');
+    background-position: 10px 10px;
+    background-size: 18px;
+    background-repeat: no-repeat;
+    padding: 10px 20px 8px 40px;
+    border: none;
+    box-shadow:  0.3px 0.4px 5px rgb(120, 120, 120);
+    transition: transform 0.3s ease-out, background-color 0.3s;
+}
+
+.inputSearch:hover {
+    transform: scale(1.08);
+}
+
+.centerFilter {
+    display: flex;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+}
+
+.filter-panel {
+    display: grid;
+    /* place-content: center; */
+    border: none;
+    box-shadow:  0.3px 0.4px 5px rgb(120, 120, 120);
+    background: rgb(170, 170, 170);
+    border-radius: 5px;
+    padding: 10px;
+    width: 250px;
+    height: auto;
+    position: relative;
+    left: 0px;
+    background-color: rgb(255, 255, 255);
+    margin: auto 0;
+}
+
+.statusFilter {
+    gap: 10px;
+    margin-bottom: 20px;
+    padding: 6px;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0.3px 0.4px 5px rgb(120, 120, 120);
+    transition: transform 0.3s ease-out, background-color 0.3s;
+}
+
+.statusFilter:hover {
+    transform: scale(1.04);
+    background-color: rgb(240, 240, 240);
+}
+
+.filter-panel h3 {
+    text-align: center;
+}
+
+.priorityFilter {
+    margin-bottom: 20px;
+    padding: 6px;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0.3px 0.4px 5px rgb(120, 120, 120);
+    transition: transform 0.3s ease-out, background-color 0.3s;
+}
+
+.priorityFilter:hover {
+    transform: scale(1.04);
+    background-color: rgb(240, 240, 240);
+}
+
+#filterButton {
+    width: 100px;
+    margin: 20px;
+    text-align: left;
+    padding: 8px 20px 8px 15px;
+    border: none;
+    box-shadow:  0.3px 0.4px 5px rgb(120, 120, 120);
+    background-image: url('https://cdn-icons-png.flaticon.com/128/2676/2676824.png');
+    background-size: 19px;
+    background-position: right 10px center;
+    background-repeat: no-repeat;
+    background-position-y: left;
+    cursor: pointer;
+    transition: transform 0.3s ease-out, background-color 0.3s;
+}
+
+#filterButton:hover {
+    transform: scale(1.08);
+    background-color: rgb(255, 255, 255);
+}
+
+#filterButton:active {
+    transform: scale(0.97);
+}
+
+.filter-panel label {
+   margin-bottom: 4px;
+}
+.hidden {
+    display: none;
+}
+
+.closeFilterSpan {
+    text-align: center;
+    position: absolute;
+    right: 0px;
+    padding: 4px;
+    width: 23px;
+}
+
+.closeFilterSpan:hover {
+    background-color: rgb(255, 0, 0);
+    cursor: pointer;
+    color: rgb(255, 255, 255);
+}
+
+.closeFilterSpan:active {
+    transform: scale(0.97);
+    background-color: rgb(150, 0, 0);
+}
+
+#overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 8888;
 }

@@ -17,10 +17,37 @@
          <option value="Medium" id="medium" class="medium">Medium Priority</option>
          <option value="Low" id="low" class="low">Low Priority</option>
         </select>
+        <input type="date" id="enterDate" class="inputDate">
         <button type="submit" class="addTask">Add Task ➕</button>
-        <button type="button" id="clearAll">Clear All ❌</button>
+        <button type="button" id="clearAll">Clear All 🗑️</button>
         </form>
         <span id="span"></span>
+        </div>
+        <div class="divSearch">
+        <input type="search" id="searchTask" class="inputSearch" placeholder="Search task...">
+         <button class="filterButton" id="filterButton">Filter</button>
+         <div class="centerFilter">
+         <div id="filterPanel" class="filter-panel hidden">
+            <span class="closeFilterSpan" id="closeFilterSpan">✖</span>
+            <h3>Filters</h3>
+
+            <label>Status</label>
+            <select class="statusFilter" id="statusFilter">
+                <option>All</option>
+                <option>Todo</option>
+                <option>In-Progress</option>
+                <option>Done</option>
+            </select>
+
+            <label>Priority</label>
+            <select class="priorityFilter" id="priorityFilter">
+                <option>All</option>
+                <option>High</option>
+                <option>Medium</option>
+                <option>Low</option>
+            </select>
+         </div>
+         </div>
         </div>
         <div class="board">
         <div id="todo-container">
@@ -30,5 +57,9 @@
         <div id="done-container">
         </div>
         </div>
+
+        <div id="overlay"></div>
+        
+        <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
         <script src="todo.js"></script>
     </body>
