@@ -18,6 +18,7 @@ body {
     border: none;
     box-shadow:  0.3px 0.4px 5px rgb(120, 120, 120);
     transition: transform 0.3s ease-out, background-color 0.3s;
+    border-radius: 6px;
 }
 
 .inputTask:hover {
@@ -32,6 +33,7 @@ body {
     background-color: rgb(240, 240, 240);
     box-shadow:  0.3px 0.4px 5px rgb(120, 120, 120);
     transition: transform 0.3s ease-out, background-color 0.3s;
+    border-radius: 6px;
 }
 
 #priority:hover {
@@ -62,6 +64,7 @@ form {
     background-color: rgb(240, 240, 240);
     box-shadow:  0.3px 0.4px 5px rgb(120, 120, 120);
     transition: transform 0.3s ease-out, background-color 0.3s;
+    border-radius: 6px;
 }
 
 .inputDate:hover {
@@ -82,6 +85,7 @@ form {
     border: none;
     box-shadow:  0.3px 0.4px 5px rgb(120, 120, 120);
     transition: transform 0.3s ease-out, background-color 0.3s;
+    border-radius: 6px;
 }
 
 .addTask:hover {
@@ -346,6 +350,7 @@ form {
     background-color: rgb(240, 240, 240);
     box-shadow:  0.3px 0.4px 5px rgb(120, 120, 120);
     transition: transform 0.3s ease-out, background-color 0.3s;
+    border-radius: 6px;
 }
 
 #clearAll:hover {
@@ -379,6 +384,7 @@ form {
     border: none;
     box-shadow:  0.3px 0.4px 5px rgb(120, 120, 120);
     transition: transform 0.3s ease-out, background-color 0.3s;
+    border-radius: 6px;
 }
 
 .inputSearch:hover {
@@ -457,6 +463,7 @@ form {
     background-position-y: left;
     cursor: pointer;
     transition: transform 0.3s ease-out, background-color 0.3s;
+    border-radius: 6px;
 }
 
 #filterButton:hover {
@@ -503,4 +510,29 @@ form {
     height: 100%;
     background: rgba(0,0,0,0.5);
     z-index: 8888;
+}
+
+#logout {
+     width: 100px;
+    height: 35px;
+    cursor: pointer;
+    height: 40px;
+    border: none;
+    box-shadow:  0.3px 0.4px 5px rgb(120, 120, 120);
+    transition: transform 0.3s ease-out, background-color 0.3s;
+    border-radius: 6px;
+}
+
+#logout:hover {
+    transform: scale(1.07);
+    background-color: rgb(255, 255, 255)
+}
+
+#logout:active {
+    transform: scale(1);
+}
+
+#logoutEmoji {
+    color: rgb(255, 0, 0);
+    font-weight: 200;
 }

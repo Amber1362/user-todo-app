@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale: 1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="login.css">
+    <link rel="icon" type="image/jpg" href="Gojosatoru.jpg">
+    </head>
+
+    <body> 
+       <form id="loginPage" class="loginPage">
+        <h2>Welcome!</h2>
+        <p class="belowWelcome">Sign in to your account</p>
+
+        <!-- Email -->
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="">
+        <span id="emailAlert" class="emailAlert"></span>
+
+        <!-- Password -->
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="">
+        <span id="passwordAlert" class="passwordAlert"></span>
+
+        <!-- Login Button -->
+        <br><br><button type="submit" class="button">Login ➜</button>
+
+        <p class="signUp">Don't have an account? <a href='signup.html'>Sign up</a></p>
+       </form>
+
+       <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+       <script src="login.js"></script>
+    </body>

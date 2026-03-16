@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign up Page</title>
+    <link rel="icon" type="image/jpg" href="Gojosatoru.jpg">
+    <link rel="stylesheet" href="signup.css">
+    </head>
+    <body>
+        <form id="signupPage" class="signupPage">
+        <h2>Create account!</h2>
+
+        <!--Name -->
+        <label for="text">Name</label>
+        <input type="text" id="name" placeholder="">
+        <span id="nameAlert" class="nameAlert"></span>
+
+         <!--Email -->
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="">
+        <span id="emailAlert" class="emailAlert"></span>
+
+         <!--Password -->
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="">
+        <span id="passwordAlert" class="passwordAlert"></span>
+
+         <!--Confirm Password -->
+        <label for="confirmPassword">Confirm password</label>
+        <input type="password" id="confirmPassword" placeholder="">
+        <span id="confirmPasswordAlert" class="confirmPasswordAlert"></span>
+
+         <!--SignUp Button -->
+        <button type="submit" id="button" class="button">Create ➜</button>
+
+        <p class="login">Already have an account? <a href='login.html'>Login</a></p>
+       </form>
+
+       <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+       <script src="signup.js"></script>
+    </body>

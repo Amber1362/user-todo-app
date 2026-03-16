@@ -15,6 +15,7 @@ filterPanel.classList.add('hidden');
 let closeFilterSpan = document.getElementById('closeFilterSpan');
 let statusFilter = document.getElementById('statusFilter');
 let priorityFilter = document.getElementById('priorityFilter');
+let logoutBtn = document.getElementById('logout');
 
 //Supabase URL and KEY
 let supabaseUrl = 'https://xjuiodjohmyjivbnrclv.supabase.co';
@@ -22,6 +23,28 @@ let supabaseKey = 'sb_publishable_OU4dAJXrbLoVFMoGWJBKZg_ULVqKZFi';
 
 //FrontEnd to BackEnd connector
 let supaBase = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+ let userId = null;
+
+async function checkSession() {
+let {data: {session} } = await supaBase.auth.getSession();
+
+if(!session) {
+    window.location.href = 'login.html';
+    return;
+}
+ userId = session.user.id;
+await getData();
+}
+
+checkSession();
+
+logoutBtn.addEventListener('click', async () => {
+    if(confirm('Are you sure you want to logout?')) {
+    await supaBase.auth.signOut();
+    window.location.href = 'login.html';
+    }
+})
 
 //State
 let tasks = [] 
@@ -52,25 +75,19 @@ async function supabaseConnection(inputValue, inputPriority, inputDate, newPosit
 
 //Fetching Data
 async function getData() {
-    try{
-        let response = await fetch('https://xjuiodjohmyjivbnrclv.supabase.co/rest/v1/tasks', {
-            method: 'GET',
-            headers: {
-                apikey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhqdWlvZGpvaG15aml2Ym5yY2x2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIxMTQ1NDQsImV4cCI6MjA4NzY5MDU0NH0.9u_vEpG-pXsxZb1gsAX7kKDloNlERg22NNOs-2cND50',
-                authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhqdWlvZGpvaG15aml2Ym5yY2x2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIxMTQ1NDQsImV4cCI6MjA4NzY5MDU0NH0.9u_vEpG-pXsxZb1gsAX7kKDloNlERg22NNOs-2cND50'
-            }
-        });
+    let {data, error} = await supaBase
+    .from('tasks')
+    .select('*')
+    .eq('user_id', userId)
 
-        if(!response.ok) {
-            throw new Error('HTTP Error');
-        }
-
-        let dataStorage = await response.json();
-        tasks = dataStorage;
-        renderTasks(tasks);
-    } catch(error) {
-        console.error(error);
+    if(error) {
+        console.log(error);
+        return;
     }
+
+    console.log('fetched tasks: ', data);
+    tasks = data;
+    renderTasks(tasks);
 }
 
 //Delete Task async Function
@@ -109,6 +126,7 @@ async function editStatus(newStatus, newPosition, id) {
     await getData();
 };
 
+//Delete todo column tasks
 async function deleteTodoTasks() {
     await supaBase
     .from('tasks')
@@ -117,6 +135,7 @@ async function deleteTodoTasks() {
     await getData();
 }
 
+//Delete in-progress column tasks
 async function deleteInProgressTasks() {
     await supaBase
     .from('tasks')
@@ -125,6 +144,7 @@ async function deleteInProgressTasks() {
     await getData(); 
 }
 
+//Delete done column tasks
 async function deleteDoneTasks() {
     await supaBase
     .from('tasks')
@@ -133,8 +153,8 @@ async function deleteDoneTasks() {
     await getData();
 }
 
+//Delete all tasks
 async function deleteAllTasks() {
-
     await Promise.all([
      deleteTodoTasks(),
      deleteInProgressTasks(),
@@ -143,6 +163,7 @@ async function deleteAllTasks() {
     await getData();
 }
 
+//Update task position
 async function updateTaskPosition(newPosition, id) {
     let {data, error} =  await supaBase
     .from('tasks')
@@ -406,7 +427,7 @@ addTask.addEventListener('submit', async (e) => {
         addTask.reset();
     };
 
-
+    //Assigning tasks position in the todo column
      let todoColumnPosition = tasks.filter(t => t.status === 'todo')
     
      let maxPosition = Math.max(...todoColumnPosition.map(t => t.position), 0);
@@ -416,17 +437,6 @@ addTask.addEventListener('submit', async (e) => {
       await supabaseConnection(inputValue, inputPriority, inputDate, newPosition);
      
       await getData();
-
-    // let progressColumnPosition = tasks.filter(task => task.status === 'in-progress')
-    // .sort((x, y) => x.position - y.position)
-    
-    // progressColumnPosition.forEach((task, index) => {
-    //     task.position = (index + 1)
-    // })
-
-    // for(let task of progressColumnPosition) {
-    //     await updateTaskPosition(task.position, task.id)
-    // }
 
 });
 
@@ -489,16 +499,17 @@ todoContainer.addEventListener('drop', async (e) => {
   let column = e.target.closest('#todo-container, #in-progress-container, #done-container');
   let id = e.dataTransfer.getData('text/plain');//Correct
 
+  //Dragged task status
   let draggedTask = tasks.find(t => t.id === id);
   let sourceStatus = draggedTask.status;
 
-  console.log(draggedTask);
-
+  //Target task status
   let targetStatus = column.id.replace('-container', '');
   if(targetStatus === null) {
     return;
   }
 
+  //Assigning the task position to the targeted status
   let todoColumnPosition = tasks.filter(t => t.status === targetStatus);
 
   let maxPosition = Math.max(...todoColumnPosition.map(t => t.position), 0);
@@ -509,6 +520,7 @@ todoContainer.addEventListener('drop', async (e) => {
 
   await editStatus(newStatus, newPosition, id);
 
+  //Normalization of the dragged task's status position
   let draggedTaskPosition = tasks.filter(t => t.status === sourceStatus)
   .sort((a, b) => a.position - b.position)
 
@@ -559,16 +571,17 @@ progressContainer.addEventListener('drop', async (e) => {
     let column = e.target.closest('#todo-container, #in-progress-container, #done-container');
   let id = e.dataTransfer.getData('text/plain');
 
+  //Dragged task status
   let draggedTask = tasks.find(t => t.id === id);
   let sourceStatus = draggedTask.status;
 
-  console.log(draggedTask.status);
-
+  //Target task status
   let targetStatus = column.id.replace('-container', '');
   if(targetStatus === null) {
     return;
   }
 
+  //Assigning task position to the targeted task status
   let progressColumnPosition = tasks.filter(t => t.status === targetStatus);
   
   let maxPosition = Math.max(...progressColumnPosition.map(t => t.position), 0);
@@ -579,6 +592,7 @@ progressContainer.addEventListener('drop', async (e) => {
 
   await editStatus(newStatus, newPosition, id);
 
+  //Normalization of the dragged task's status position
   let draggedTaskPosition = tasks.filter(t => t.status === sourceStatus)
   .sort((a, b) => a.position - b.position);
 
@@ -640,15 +654,18 @@ doneContainer.addEventListener('drop', async (e) => {
     let column = e.target.closest('#todo-container, #in-progress-container, #done-container');
   let id = e.dataTransfer.getData('text/plain');
 
+  //Dragged task status
   let draggedTask = tasks.find(t => t.id === id); 
   let sourceStatus = draggedTask.status;
   console.log(sourceStatus);
 
+  //Target task status
   let targetStatus = column.id.replace('-container', '');
   if(targetStatus === null) {
     return;
   }
 
+  //Assigning the task position to the targeted status
   let doneColumnPosition = tasks.filter(t => t.status === targetStatus);
 
   let maxPosition = Math.max(...doneColumnPosition.map(t => t.position), 0);
@@ -659,6 +676,7 @@ doneContainer.addEventListener('drop', async (e) => {
 
   await editStatus(newStatus, newPosition, id);
 
+  //Normalization of the dragged task's status position
   let draggedTaskPosition = tasks.filter(t => t.status === sourceStatus)
   .sort((a, b) => a.position - b.position);
 
@@ -760,7 +778,6 @@ todoContainer.addEventListener('click', async (e) => {
 
             await getData();
         }
-     console.log(taskId);
     };
 
     //Edit Button
@@ -998,5 +1015,3 @@ doneContainer.addEventListener('click', async (e) => {
         await getData();
     };
 });
-
- getData();
