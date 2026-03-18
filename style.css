@@ -14,11 +14,15 @@ body {
 }
 
 .inputTask {
-    padding: 8px;
+    padding: 10px;
     border: none;
     box-shadow:  0.3px 0.4px 5px rgb(120, 120, 120);
     transition: transform 0.3s ease-out, background-color 0.3s;
     border-radius: 6px;
+}
+
+.form-row {
+    display: contents;
 }
 
 .inputTask:hover {
@@ -59,6 +63,8 @@ form {
 }
 
 .inputDate {
+    width: 150px;
+    padding: 10px;
     cursor: pointer;
     border: none;
     background-color: rgb(240, 240, 240);
@@ -117,8 +123,8 @@ form {
     flex: 1;
     text-align: start;
     padding: 0;
-    min-height: 470px;
-    max-height: 470px;
+    height: 470px;
+    /* max-height: 470px; */
     background-color: rgb(255, 255, 255);
     border: none;
     box-shadow:  0.3px 0.4px 5px rgb(120, 120, 120);
@@ -346,6 +352,8 @@ form {
 
 #clearAll {
     cursor: pointer;
+    width: 100px;
+    padding: 10px;
     border: none;
     background-color: rgb(240, 240, 240);
     box-shadow:  0.3px 0.4px 5px rgb(120, 120, 120);
@@ -406,7 +414,7 @@ form {
     border: none;
     box-shadow:  0.3px 0.4px 5px rgb(120, 120, 120);
     background: rgb(170, 170, 170);
-    border-radius: 5px;
+    border-radius: 10px;
     padding: 10px;
     width: 250px;
     height: auto;
@@ -421,13 +429,15 @@ form {
     margin-bottom: 20px;
     padding: 6px;
     cursor: pointer;
+    background-color: rgb(230, 230, 230);
+    border-radius: 6px;
     border: none;
     box-shadow: 0.3px 0.4px 5px rgb(120, 120, 120);
     transition: transform 0.3s ease-out, background-color 0.3s;
 }
 
 .statusFilter:hover {
-    transform: scale(1.04);
+    transform: scale(1.02);
     background-color: rgb(240, 240, 240);
 }
 
@@ -437,6 +447,8 @@ form {
 
 .priorityFilter {
     margin-bottom: 20px;
+    border-radius: 6px;
+    background-color: rgb(230, 230, 230);
     padding: 6px;
     cursor: pointer;
     border: none;
@@ -445,7 +457,7 @@ form {
 }
 
 .priorityFilter:hover {
-    transform: scale(1.04);
+    transform: scale(1.02);
     background-color: rgb(240, 240, 240);
 }
 
@@ -535,4 +547,79 @@ form {
 #logoutEmoji {
     color: rgb(255, 0, 0);
     font-weight: 200;
+}
+
+#loadingOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#spinner {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 3px solid rgb(220, 220, 220);
+    border-top: 3px solid rgb(99, 102, 241);
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg);}
+    100% { transform: rotate(360deg);}
+}
+
+@media (max-width: 600px) {
+    .board {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    #todo-container,
+    #in-progress-container,
+    #done-container {
+        width: 95%;
+        margin: 5px 0px;  /* remove left right margin */
+        flex: none;
+        max-height: 300px;
+    }
+
+    form {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .form-row {
+        display: flex;
+        gap: 20px;
+        width: 95%;
+    }
+
+    .form-row button,
+    .form-row select,
+    .form-row input {
+    flex: 1;
+    }
+
+    .inputTask {
+        width: 95%;
+    }
+}
+
+@media (max-width: 820px) {
+    form {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    #enterTask {
+        width: 82%;
+    }
 }

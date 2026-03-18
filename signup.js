@@ -10,6 +10,7 @@ let nameInput = document.getElementById('name');
 let emailInput = document.getElementById('email');
 let password = document.getElementById('password');
 let confirmPassword = document.getElementById('confirmPassword');
+let createButton = document.getElementById('button');
 
     let nameAlert = document.getElementById('nameAlert');
     let emailAlert = document.getElementById('emailAlert');
@@ -109,6 +110,10 @@ confirmPassword.addEventListener('input', () => {
 })
 
 signUpPage.addEventListener('submit', async (e) => {
-    e.preventDefault()
+    e.preventDefault();
+    createButton.disabled = true;
+    createButton.textContent = 'Creating...';
     await signUp();
+    createButton.disabled = false;
+    createButton.textContent = 'Create ➜'
 });

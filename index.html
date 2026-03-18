@@ -12,15 +12,20 @@
         <div class="upper-section">
         <form id="todo">
         <input type="value"  id="enterTask" class="inputTask" placeholder="Enter task...">
+        <div class="form-row">
         <select name="priority" id="priority">
          <option value="High" id="high" class="high">High Priority</option>
          <option value="Medium" id="medium" class="medium">Medium Priority</option>
          <option value="Low" id="low" class="low">Low Priority</option>
         </select>
         <input type="date" id="enterDate" class="inputDate">
-        <button type="submit" class="addTask">Add Task ➕</button>
+        </div>
+
+        <div class="form-row">
+        <button type="submit" class="addTask" id="addTask">Add Task ➕</button>
         <button type="button" id="clearAll">Clear All 🗑️</button>
         <button type="button" id="logout">Logout <span id="logoutEmoji">⏻</span></button>
+        </div>
         </form>
         <span id="span"></span>
         </div>
@@ -60,6 +65,9 @@
         </div>
 
         <div id="overlay"></div>
+        <div id="loadingOverlay">
+            <div id="spinner"></div>
+        </div>
         
         <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
         <script src="todo.js"></script>

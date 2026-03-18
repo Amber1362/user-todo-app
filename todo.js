@@ -1,4 +1,5 @@
 let addTask = document.getElementById('todo');
+let addTaskButton = document.getElementById('addTask')
 let inputTask = document.querySelector('#enterTask');
 let span = document.getElementById('span');
 let todoContainer = document.getElementById('todo-container');
@@ -16,6 +17,14 @@ let closeFilterSpan = document.getElementById('closeFilterSpan');
 let statusFilter = document.getElementById('statusFilter');
 let priorityFilter = document.getElementById('priorityFilter');
 let logoutBtn = document.getElementById('logout');
+
+let deleteButton;
+let startBtn;
+let cancelBtn;
+let saveBtn;
+let editButton;
+let undoBtn;
+let completeBtn;
 
 //Supabase URL and KEY
 let supabaseUrl = 'https://xjuiodjohmyjivbnrclv.supabase.co';
@@ -35,13 +44,18 @@ if(!session) {
 }
  userId = session.user.id;
 await getData();
+document.getElementById('loadingOverlay').style.display = 'none';
 }
 
 checkSession();
 
 logoutBtn.addEventListener('click', async () => {
     if(confirm('Are you sure you want to logout?')) {
+        logoutBtn.disabled = true;
+        logoutBtn.textContent = 'logging out'
     await supaBase.auth.signOut();
+    logoutBtn.disabled = false;
+    logoutBtn.textContent = 'Logout ⏻';
     window.location.href = 'login.html';
     }
 })
@@ -60,7 +74,8 @@ async function supabaseConnection(inputValue, inputPriority, inputDate, newPosit
         status: 'todo',
         priority: inputPriority,
         date: inputDate || null,
-        position: newPosition
+        position: newPosition,
+        user_id: userId
         }
     ])
     .select();
@@ -261,13 +276,13 @@ function renderTasks(array = tasks) {
             console.log(tasks);
 
             //Edit Button: Cancel Edit Button
-            let cancelBtn = document.createElement('button');
+            cancelBtn = document.createElement('button');
             cancelBtn.textContent = '\u00D7';
             cancelBtn.classList.add('cancel-btn');
             cancelBtn.dataset.id = task.id;
 
             //Edit Button: Save Edit Button
-            let saveBtn = document.createElement('button');
+            saveBtn = document.createElement('button');
             saveBtn.textContent = '✔';
             saveBtn.classList.add('save-btn');
             saveBtn.dataset.id = task.id;
@@ -282,13 +297,13 @@ function renderTasks(array = tasks) {
             span.dataset.id = task.id;
 
             //Delete Task Button
-            let deleteButton = document.createElement('button');
+             deleteButton = document.createElement('button');
         deleteButton.textContent = '\u00D7';
         deleteButton.classList.add('delete-btn');
         deleteButton.dataset.id = task.id;
 
         //Edit Task Button
-        let editButton = document.createElement('button');
+        editButton = document.createElement('button');
         editButton.textContent = '✎';
         editButton.classList.add('edit-btn');
         editButton.dataset.id = task.id;
@@ -299,7 +314,7 @@ function renderTasks(array = tasks) {
 
         if(task.status === 'todo') {  //Todo Container
             //Start Button
-            let startBtn = document.createElement('button');
+            startBtn = document.createElement('button');
             startBtn.textContent = '➜';
             startBtn.classList.add('start-btn');
             startBtn.dataset.id = task.id;
@@ -308,14 +323,14 @@ function renderTasks(array = tasks) {
         } else 
         if(task.status === 'in-progress') {  //In-Progress Container
             //Complete Button
-            let completeBtn = document.createElement('button');
+            completeBtn = document.createElement('button');
             completeBtn.textContent = '➜';
             completeBtn.classList.add('complete-btn');
             completeBtn.dataset.id = task.id;
             paragragh.append(completeBtn);
 
             //Undo Button
-            let undoBtn = document.createElement('button');
+            undoBtn = document.createElement('button');
             undoBtn.textContent = '↩';
             undoBtn.classList.add('undo-btn');
             undoBtn.dataset.id = task.id;
@@ -324,7 +339,7 @@ function renderTasks(array = tasks) {
         } else
         if(task.status === 'done') {   //Done Container
             //Undo Button
-            let undoBtn = document.createElement('button');
+            undoBtn = document.createElement('button');
             undoBtn.textContent = '↩';
             undoBtn.classList.add('undo-btn');
             undoBtn.dataset.id = task.id;
@@ -436,7 +451,11 @@ addTask.addEventListener('submit', async (e) => {
 
       await supabaseConnection(inputValue, inputPriority, inputDate, newPosition);
      
+      addTaskButton.disabled = true;
+      addTaskButton.textContent = 'Adding...';
       await getData();
+      addTaskButton.disabled = false;
+      addTaskButton.textContent = 'Add Task ➕';
 
 });
 
@@ -451,7 +470,11 @@ inputTask.addEventListener('input', () => {
 clearAlltasks.addEventListener('click', async () => {
    if(tasks.length > 0) {
    if(confirm('Are you sure you want clear all the tasks?')) {
+    clearAlltasks.disabled = true;
+    clearAlltasks.textContent = 'Clearing...';
    await deleteAllTasks();
+   clearAlltasks.disabled = false;
+   clearAlltasks.textContent = 'Clear All 🗑️';
    };
   };
 });
@@ -740,12 +763,20 @@ todoContainer.addEventListener('click', async (e) => {
 
         if(edit !== '') {
             newTask = edit;
+            saveBtn.disabled = true;
+            saveBtn.textContent = '...';
             await editTasks(newTask, id);
+            saveBtn.disabled = false;
+            saveBtn.textContent = '✔';
             editingId = null;
 
         if(editTask) {
             newPriorities = editTask;
+            saveBtn.disabled = true;
+            saveBtn.textContent = '...';
             await editPriorities(newPriorities, id);
+             saveBtn.disabled = false;
+            saveBtn.textContent = '✔';
             editingId = null;
         }
         };
@@ -763,8 +794,12 @@ todoContainer.addEventListener('click', async (e) => {
     if(e.target.classList.contains('delete-btn')) {
         let taskId = e.target.dataset.id;
         if(confirm('Delete the task?')) {
+            deleteButton.disabled = true;
+            deleteButton.textContent = '...';
              await deleteTasks(taskId);
-
+             deleteButton.disabled = false;
+             deleteButton.textContent = '\u00D7';
+             
             let todoColumnPosition = tasks.filter(t => t.status === 'todo')
             .sort((a, b) => a.position - b.position);
 
@@ -798,7 +833,11 @@ todoContainer.addEventListener('click', async (e) => {
 
         let newPosition = maxPosition + 1;
 
+        startBtn.disabled = true;
+        startBtn.textContent = '...';
         await editStatus(newStatus, newPosition, id);
+        startBtn.disabled = false;
+        startBtn.textContent = '➜';
 
         let todoColumnPosition = tasks.filter(t => t.status === 'todo')
             .sort((a, b) => a.position - b.position);
@@ -829,14 +868,22 @@ progressContainer.addEventListener('click', async (e) => {
 
         if(edit !== '') {
             newTask = edit;
+            saveBtn.disabled = true;
+            saveBtn.textContent = '...';
             await editTasks(newTask, id);
+             saveBtn.disabled = false;
+            saveBtn.textContent = '✔';
             editingId = null;
         };
 
         if(editTask) {
             newPriorities = editTask;
              editingId = null;
+              saveBtn.disabled = true;
+            saveBtn.textContent = '...';
             await editPriorities(newPriorities, id);
+            saveBtn.disabled = false;
+            saveBtn.textContent = '✔';
         };
     };
 
@@ -852,7 +899,11 @@ progressContainer.addEventListener('click', async (e) => {
     if(e.target.classList.contains('delete-btn')) {
     let taskId = e.target.dataset.id;
     if(confirm('Delete the task?')) {
+        deleteButton.disabled = true;
+        deleteButton.textContent = '...';
         await deleteTasks(taskId);
+        deleteButton.disabled = false;
+        deleteButton.textContent = '\u00D7';
 
         let progressColumnPosition = tasks.filter(t => t.status === 'in-progress')
         .sort((a, b) => a.position - b.position)
@@ -886,7 +937,11 @@ progressContainer.addEventListener('click', async (e) => {
 
         let newPosition = maxPosition + 1;
 
+        completeBtn.disabled = true;
+        completeBtn.textContent = '...';
         await editStatus(newStatus, newPosition, id);
+        completeBtn.disabled = false;
+        completeBtn.textContent = '➜';
 
         let progressColumnNormalization = tasks.filter(t => t.status === 'in-progress')
         .sort((a, b) => a.position - b.position)
@@ -912,7 +967,12 @@ progressContainer.addEventListener('click', async (e) => {
         let maxPosition = Math.max(...todoColumnPosition.map(t => t.position), 0);
 
         let newPosition = maxPosition + 1;
+
+        undoBtn.disabled = true;
+        undoBtn.textContent = '...';
         await editStatus(newStatus, newPosition, id);
+        undoBtn.disabled = false;
+        undoBtn.textContent = '↩';
 
          let progressColumnNormalization = tasks.filter(t => t.status === 'in-progress')
         .sort((a, b) => a.position - b.position)
@@ -943,14 +1003,22 @@ doneContainer.addEventListener('click', async (e) => {
 
         if(edit !== '') {
            newTask = edit;
+            saveBtn.disabled = true;
+            saveBtn.textContent = '...';
             await editTasks(newTask, id);
+            saveBtn.disabled = false;
+            saveBtn.textContent = '✔';
             editingId = null;
         }
 
             if(editTask) {
                 newPriorities = editTask;
                 editingId = null;
+                saveBtn.disabled = true;
+                saveBtn.textContent = '...';
                 await editPriorities(newPriorities, id);
+                 saveBtn.disabled = false;
+                 saveBtn.textContent = '✔';
             };
     };
 
@@ -966,7 +1034,11 @@ doneContainer.addEventListener('click', async (e) => {
     if(e.target.classList.contains('delete-btn')) {
     let taskId = e.target.dataset.id;
     if(confirm('Delete the task?')) {
+        deleteButton.disabled = true;
+        deleteButton.textContent = '...';
         await deleteTasks(taskId);
+        deleteButton.disabled = false;
+        deleteButton.textContent = '\u00D7';
     }
 
     let doneColumnPosition = tasks.filter(t => t.status === 'done')
@@ -998,8 +1070,13 @@ doneContainer.addEventListener('click', async (e) => {
 
         let maxPosition = Math.max(...progressColumnPosition.map(t => t.position), 0);
 
-        let newPosition = maxPosition + 1
+        let newPosition = maxPosition + 1;
+
+        undoBtn.disabled = true;
+        undoBtn.textContent = '...';
         await editStatus(newStatus, newPosition, id);
+        undoBtn.disabled = false;
+        undoBtn.textContent = '↩';
 
         let doneColumnNormalization = tasks.filter(t => t.status === 'done')
         .sort((a, b) => a.position - b.position)

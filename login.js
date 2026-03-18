@@ -8,6 +8,7 @@ let supaBase = window.supabase.createClient(supabaseUrl, supabaseKey);
 let loginPage = document.getElementById('loginPage');
 let inputEmail = document.getElementById('email');
 let inputPassword = document.getElementById('password');
+let loginButton = document.getElementById('loginButton');
 
 let emailAlert = document.getElementById('emailAlert');
 let passwordAlert = document.getElementById('passwordAlert');
@@ -72,5 +73,9 @@ inputPassword.addEventListener('input', () => {
 
 loginPage.addEventListener('submit', async (e) => {
     e.preventDefault();
+    loginButton.disabled = true;
+    loginButton.textContent = 'logging in...';
     await login();
+    loginButton.disabled = false;
+    loginButton.textContent = 'Login ➜';
 })
